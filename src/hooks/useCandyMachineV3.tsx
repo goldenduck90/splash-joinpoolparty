@@ -230,16 +230,17 @@ export default function useCandyMachineV3(
 
         console.log("signers: ", signers);
         console.log("transactions: ", transactions);
+        let signedTransactions = [];
         for (let signer in signers) {
           console.log("????", signer, signers[signer]);
-          transactions = await signers[signer].signAllTransactions(
-            transactions
+          const signedTransaction = await signers[signer].signTransaction(
+            transactions[0]
           );
+          signedTransactions.push(signedTransaction);
         }
 
-        let signedTransactions = transactions;
         console.log(allowList);
-        console.log(transactions);
+        console.log("signedTransactions: ", signedTransactions);
 
         if (allowList) {
           const allowListCallGuardRouteTx = signedTransactions.shift();
