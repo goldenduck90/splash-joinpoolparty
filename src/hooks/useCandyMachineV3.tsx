@@ -213,7 +213,7 @@ export default function useCandyMachineV3(
           );
         }
         const blockhash = await mx.rpc().getLatestBlockhash();
-
+        console.log("blockhash: ", blockhash);
         let transactions = transactionBuilders.map((t) =>
           t.toTransaction(blockhash)
         );
@@ -229,8 +229,8 @@ export default function useCandyMachineV3(
           });
         });
 
-        console.log(signers)
-        console.log(transactions)
+        console.log("signers: ", signers);
+        console.log("transactions", transactions);
         for (let signer in signers) {
           transactions = await signers[signer].signAllTransactions(
             transactions
@@ -238,8 +238,8 @@ export default function useCandyMachineV3(
         }
 
         let signedTransactions = transactions;
-        console.log(allowList)
-        console.log(transactions)
+        console.log(allowList);
+        console.log(transactions);
 
         if (allowList) {
           const allowListCallGuardRouteTx = signedTransactions.shift();
