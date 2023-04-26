@@ -176,9 +176,7 @@ export default function useCandyMachineV3(
         }));
 
         const transactionBuilders: TransactionBuilder[] = [];
-        console.log("above---------");
         if (allowList) {
-          console.log("in allow---------");
           if (!proofMemo.merkles[opts.groupLabel || "default"].proof.length)
             throw new Error("User is not in allowed list");
           transactionBuilders.push(
@@ -195,7 +193,6 @@ export default function useCandyMachineV3(
           );
         }
         for (let index = 0; index < quantityString; index++) {
-          console.log("in for---------------");
           const token = Keypair.generate();
           const mint = Keypair.generate();
           transactionBuilders.push(
@@ -215,7 +212,7 @@ export default function useCandyMachineV3(
           );
         }
         const blockhash = await mx.rpc().getLatestBlockhash();
-        console.log("blockhash: ", blockhash);
+
         let transactions = transactionBuilders.map((t) =>
           t.toTransaction(blockhash)
         );
@@ -234,7 +231,7 @@ export default function useCandyMachineV3(
         console.log("signers: ", signers);
         console.log("transactions: ", transactions);
         for (let signer in signers) {
-          console.log("signer--------", signer);
+          console.log('????', signer, signers[signer])
           transactions = await signers[signer].signAllTransactions(
             transactions
           );
