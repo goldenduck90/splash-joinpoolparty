@@ -231,7 +231,7 @@ export default function useCandyMachineV3(
         console.log("signers: ", signers);
         console.log("transactions: ", transactions);
         for (let signer in signers) {
-          console.log('????', signer, signers[signer])
+          console.log("????", signer, signers[signer]);
           transactions = await signers[signer].signAllTransactions(
             transactions
           );
